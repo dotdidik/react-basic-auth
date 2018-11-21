@@ -3,7 +3,6 @@ import store from 'store';
 import isLoggedIn from './helpers/is_logged_in';
 import { Redirect } from 'react-router-dom';
 
-import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
 
 import { 

@@ -6,8 +6,6 @@ import {
   NavbarToggler,
   NavbarBrand,
   Nav,
-  NavItem,
-  NavLink,
   UncontrolledDropdown,
   DropdownToggle,
   DropdownMenu,
@@ -25,24 +23,18 @@ import axios from 'axios';
 
 const API_GENRES = 'http://api-museek.herokuapp.com/genres';
 
-export default class Homepage extends React.Component {
+export default class AnggotaAll extends React.Component {
   constructor(props) {
     super(props);
     this.toggle = this.toggle.bind(this);
     this.state = {
       isOpen: false,
-      posts: [],
       anggota:[]
     };
   }
   
 
   componentDidMount() {
-      axios.get('https://reduxblog.herokuapp.com/api/posts?key=didik')
-        .then ( r => {
-            this.setState({ posts:r.data });
-            console.log('ini response server', r.data)
-      });
       axios.get('https://reduxblog.herokuapp.com/api/posts?key=anggota')
         .then ( res => {
           this.setState({ anggota:res.data });
@@ -61,14 +53,11 @@ export default class Homepage extends React.Component {
       <div>
         <Navbar color="light" light expand="md">
           <Container>
-          <NavbarBrand href="/">HOMEPAGE</NavbarBrand>
+          <NavbarBrand href="/">ANGGOTA</NavbarBrand>
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="ml-auto" navbar>
               <UncontrolledDropdown nav inNavbar>
-              <NavItem>
-                <Link to="/anggota"> Anggota </Link>
-              </NavItem>
                 <DropdownToggle nav caret>
                   Account
                 </DropdownToggle>
@@ -84,29 +73,6 @@ export default class Homepage extends React.Component {
           </Container>
         </Navbar>
         <section>
-            <Container>
-                <Row>
-                    <Col className='d-flex'>
-                        {
-                            this.state.posts.map(post =>
-                                <Col md='4' key={post.id}>
-                                    <Card>
-                                        <CardImg style={{maxHeight:'120px'}} 
-                                        top width="100%" 
-                                        src={post.categories}/>
-                                        <CardBody>
-                                        <CardTitle>{post.title}</CardTitle>
-                                        <CardText>{post.content}</CardText>
-                                        </CardBody>
-                                    </Card>
-                                </Col>    
-                            )
-                        }
-                    </Col>
-                </Row>
-            </Container>
-        </section>
-        <section>
           <hr/>
           <Container>
             <h1>Angoota</h1>
@@ -115,7 +81,7 @@ export default class Homepage extends React.Component {
                         {
                             this.state.anggota.map(ang =>
                                 <Col md='4' key={ang.id}>
-                                    <Link to={`/${ang.id}`}>
+                                    <Link to={`/anggota/${ang.id}`}>
                                       <Card>
                                           <CardImg style={{maxHeight:'120px'}} 
                                           top width="100%" 
